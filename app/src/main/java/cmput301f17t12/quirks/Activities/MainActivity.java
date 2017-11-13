@@ -160,6 +160,18 @@ public class MainActivity extends BaseActivity {
         return types;
     }
 
+    public ArrayList<String> buildFeedFiltered (ArrayList<Event> events){
+        ArrayList<String> types = new ArrayList<>();
+//        for (int i = 0; i < events.size(); i++) {
+//            ArrayList<Event> temp = quirks.get(i).getEventList().getList();
+//            for (int j = 0; j < temp.size(); j++) {
+//                newsitems.add(temp.get(j));
+//                types.add(quirks.get(i).getType());
+//            }
+//        }
+        return types;
+    }
+
 
     public String getQueryFilterType(){
         String query = "type";
@@ -206,15 +218,24 @@ public class MainActivity extends BaseActivity {
         else if (query.equals("comment") && !arg.equals("")){
             // show all with comment matching
             // @TODO
+            System.out.println("all event comments: ");
             for (int i = 0; i < size; i++){
                 Quirk curQuirk = userQuirks.getQuirk(i);
                 EventList curEventList = curQuirk.getEventList();
                 int size2 = curEventList.size();
                 for (int j = 0; j < size2; j++){
-                    if (curEventList.getEvent(j).getComment().equals("apple")){
+                    System.out.println("\t" + curEventList.getEvent(j).getComment());
+                    String pattern = ".*" + arg + ".*";
+                    if (curEventList.getEvent(j).getComment().matches(pattern)){
                         filteredEvents.addEvent(curEventList.getEvent(j));
                     }
                 }
+            }
+
+
+            System.out.println("events matching comment: " + arg);
+            for (int i = 0; i < filteredEvents.size(); i ++){
+                System.out.println("\t" + filteredEvents.getEvent(i).getComment());
             }
             applyOfflineFilter(filteredEvents);
 
@@ -224,8 +245,19 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    public void showAll(){
+
+    }
+
     public void applyOfflineFilter(EventList events){
         // @TODO update the listview with the given QuirkList
+        System.out.println("applying offline filter");
+        System.out.println("should show events:");
+        for (int i = 0; i< events.size(); i++){
+            System.out.println("\t" + events.getEvent(i).getComment());
+        }
+        newsitems.clear();
+        adapter.notifyDataSetChanged();
     }
 
 
