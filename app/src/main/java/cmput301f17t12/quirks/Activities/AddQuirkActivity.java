@@ -1,6 +1,8 @@
 package cmput301f17t12.quirks.Activities;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -42,13 +45,14 @@ public class AddQuirkActivity extends AppCompatActivity {
     private ArrayList<Day> occurence;
     private TextView SelectDate;
     private DatePickerDialog.OnDateSetListener SelectDateListener;
-    public RadioButton radButMon;
-    public RadioButton radButTue;
-    public RadioButton radButWed;
-    public RadioButton radButThur;
-    public RadioButton radButFri;
-    public RadioButton radButSat;
-    public RadioButton radButSun;
+    public CheckBox checkButMon;
+    public CheckBox checkButTue;
+    public CheckBox checkButWed;
+    public CheckBox checkButThur;
+    public CheckBox checkButFri;
+    public CheckBox checkButSat;
+    public CheckBox checkButSun;
+
     private AlertDialog.Builder builder;
     public String query;
     public String jestID;
@@ -60,13 +64,13 @@ public class AddQuirkActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_quirk);
         Button Save_but = (Button)findViewById(R.id.SaveBut);
         Button Cancel_but = (Button)findViewById(R.id.Cancelbut);
-        radButMon = (RadioButton)findViewById(R.id.radioButMonday);
-        radButTue = (RadioButton)findViewById(R.id.radioButTuesday);
-        radButWed = (RadioButton)findViewById(R.id.radioButWednesday);
-        radButThur = (RadioButton)findViewById(R.id.radioButThursday);
-        radButFri = (RadioButton)findViewById(R.id.radioButFriday);
-        radButSat = (RadioButton)findViewById(R.id.radioButSaturday);
-        radButSun = (RadioButton)findViewById(R.id.radioButSunday);
+        checkButMon = (CheckBox)findViewById(R.id.checkBoxMon);
+        checkButTue = (CheckBox)findViewById(R.id.checkBoxTue);
+        checkButWed = (CheckBox)findViewById(R.id.checkBoxWed);
+        checkButThur = (CheckBox)findViewById(R.id.checkBoxThur);
+        checkButFri = (CheckBox)findViewById(R.id.checkBoxFri);
+        checkButSat = (CheckBox)findViewById(R.id.checkBoxSat);
+        checkButSun = (CheckBox)findViewById(R.id.checkBoxSun);
         SelectDate = (TextView)findViewById(R.id.textViewSelDate);
       
         jestID = "AV-xx8ahi8-My2t7XP4j";
@@ -182,25 +186,28 @@ public class AddQuirkActivity extends AppCompatActivity {
     // an occurence item was sl
     private ArrayList<Day> occurenceItemSelected(){
         ArrayList<Day> Day = new ArrayList<Day>();
-        if(radButMon.isChecked()){
+
+        if(checkButMon.isChecked()){
             Day.add(cmput301f17t12.quirks.Enumerations.Day.MONDAY);
         }
-        if(radButTue.isChecked()){
+        if(checkButTue.isChecked()){
             Day.add(cmput301f17t12.quirks.Enumerations.Day.TUESDAY);
         }
-        if(radButWed.isChecked()){
+        if(checkButWed.isChecked()){
             Day.add(cmput301f17t12.quirks.Enumerations.Day.WEDNESDAY);
         }
-        if(radButThur.isChecked()){
+        if(checkButThur.isChecked()){
             Day.add(cmput301f17t12.quirks.Enumerations.Day.THURSDAY);
         }
-        if(radButFri.isChecked()){
+        if(checkButFri.isChecked()){
             Day.add(cmput301f17t12.quirks.Enumerations.Day.FRIDAY);
         }
-        if(radButSat.isChecked()){
+
+        if(checkButSat.isChecked()){
             Day.add(cmput301f17t12.quirks.Enumerations.Day.SATURDAY);
         }
-        if(radButSun.isChecked()){
+
+        if(checkButSun.isChecked()){
             Day.add(cmput301f17t12.quirks.Enumerations.Day.SUNDAY);
         }
      return Day;
