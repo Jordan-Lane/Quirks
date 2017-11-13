@@ -103,7 +103,9 @@ public class QuirksActivity extends BaseActivity {
                 }
                 else{
 //                    applyFilter(query);
+
                     offlineFilter(query, currentlylogged);
+
                 }
             }
 
