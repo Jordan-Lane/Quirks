@@ -57,7 +57,7 @@ public class EditEventActivityTest {
         //Login with user testing 123 and go to NewEvent ACtivity to have
         //quirks to log
         onView(withId(R.id.loginUser))
-                .perform(typeText("intenttesting"), closeSoftKeyboard());
+                .perform(typeText("intest1"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn))
                 .perform(click());
         onView(withId(R.id.action_quirklist))
@@ -67,8 +67,8 @@ public class EditEventActivityTest {
         onData(anything()).inAdapterView(withId(R.id.el_eventslistview)).atPosition(0).
                 onChildView(withId(R.id.el_eventview)).perform(click());
         //Cancel button in add Events
-        onView(withId(R.id.cancel_button))
-                .perform(click());
+//        onView(withId(R.id.cancel_button))
+//                .perform(click());
         intended(hasComponent(MainActivity.class.getName()), times(2));
         Intents.release();
     }
