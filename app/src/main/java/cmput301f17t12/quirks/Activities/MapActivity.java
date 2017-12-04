@@ -191,11 +191,8 @@ public class MapActivity extends BaseActivity
         else if(filterType.equals("Following")){
             for (Quirk currQuirk: friendsQuirkList.getList()) {
                 for(Event currEvent: currQuirk.getEventList().getList()){
-                    if(currEvent.getGeolocation() != null) {
-                        if (haversine(currEvent.getGeolocation().getLatitude(), currEvent.getGeolocation().getLongitude(),
-                                userLoc.getLatitude(), userLoc.getLongitude()) < 5){
-                            events.addEvent(currEvent);
-                        }
+                    if (currEvent.getGeolocation() != null) {
+                        events.addEvent(currEvent);
                     }
                 }
             }
@@ -291,6 +288,13 @@ public class MapActivity extends BaseActivity
         userMarker = googleMap.addMarker(new MarkerOptions().position(userLatLon)
                 .title("Your Location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(userLatLon));
+
+        // If there is a filtered event list from the intent, show it
+        Object tmp = getIntent().getSerializableExtra("FILTERED_LIST");
+        if (tmp != null) {
+            EventList filteredEventList = (EventList) tmp;
+            displayEventListLoc(filteredEventList);
+        }
     }
 
 
