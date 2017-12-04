@@ -90,11 +90,14 @@ public class EditQuirkActivityTest {
     //test that Title an be inputted and saved
     public void EditQuirkTitleTest(){
         Intents.init();
+        //Navigate to EditQuirkActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onData(anything()).inAdapterView(withId(R.id.quirk_listview)).atPosition(0).
                 perform(click());
+
+        //Test to change Title and check if it is saved properly
         onView(withId(R.id.QuirkeditTextTitle)).perform(replaceText(title), closeSoftKeyboard());
         onView(withId(R.id.SaveBut)).perform(click());
         intended(hasComponent(QuirksActivity.class.getName()));
@@ -109,10 +112,12 @@ public class EditQuirkActivityTest {
     @Test
     public void EditQuirkType(){
         Intents.init();
+        //Navigate to EditQuirkActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onData(anything()).inAdapterView(withId(R.id.quirk_listview)).atPosition(0).perform(click());
+        //Test to change Type and check if it is saved properly
         onView(withId(R.id.QuirkeditTextType)).perform(replaceText(type), closeSoftKeyboard());
         onView(withId(R.id.SaveBut)).perform(click());
         intended(hasComponent(QuirksActivity.class.getName()));
@@ -125,10 +130,13 @@ public class EditQuirkActivityTest {
     @Test
     public void EditQuirkReason(){
         Intents.init();
+        //Navigate to EditQuirkActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onData(anything()).inAdapterView(withId(R.id.quirk_listview)).atPosition(0).perform(click());
+
+        //Test to change Reason and check if it is saved properly
         onView(withId(R.id.QuirkeditTextReason)).perform(replaceText(reason), closeSoftKeyboard());
         onView(withId(R.id.SaveBut)).perform(click());
         intended(hasComponent(QuirksActivity.class.getName()),times(1));
@@ -142,10 +150,12 @@ public class EditQuirkActivityTest {
     @Test
     public void EditQuirkDate(){
         Intents.init();
+        //Navigate to EditQuirkActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onData(anything()).inAdapterView(withId(R.id.quirk_listview)).atPosition(0).perform(click());
+        //Test to change Starting Date and check if it is saved properly
         onView( withId(R.id.textViewSelectStartingDateEdit)).perform(click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).
                 perform(PickerActions.setDate(year, monthOfYear, dayOfMonth));
@@ -164,10 +174,12 @@ public class EditQuirkActivityTest {
     @Test
     public void EditQuirkGoal(){
         Intents.init();
+        //Navigate to EditQuirkActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onData(anything()).inAdapterView(withId(R.id.quirk_listview)).atPosition(0).perform(click());
+        //Test to change Goal and check if it is saved properly
         onView(withId(R.id.QuirkeditTextGoal)).perform(replaceText(String.valueOf(goal)));
         onView(withId(R.id.SaveBut)).perform(click());
         intended(hasComponent(QuirksActivity.class.getName()));
@@ -186,7 +198,7 @@ public class EditQuirkActivityTest {
         onView(withId(R.id.action_quirklist)).perform(click());
         onData(anything()).inAdapterView(withId(R.id.quirk_listview)).atPosition(0).perform(click());
         onView(withId(R.id.CancelBut)).perform(click());
-        intended(hasComponent(QuirksActivity.class.getName()));
+        intended(hasComponent(QuirksActivity.class.getName()),times(1));
         intended(hasComponent(EditQuirkActivity.class.getName()),times(1));
         Intents.release();
     }

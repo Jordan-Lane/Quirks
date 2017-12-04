@@ -60,7 +60,7 @@ public class RequestActivityTest {
     public void declineButton(){
 
         Intents.init();
-
+        //Navigate to REquest
         onView(withId(R.id.loginUser))
                 .perform(typeText("intest2"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn))
@@ -69,6 +69,8 @@ public class RequestActivityTest {
                 .perform(click());
         onView(withId(R.id.action_request))
                 .perform(click());
+
+        //Navigate to REquest
         onData(anything()).inAdapterView(withId(R.id.listviewRequest)).atPosition(0).
                 onChildView(withId(R.id.buttonDecline)).perform(click());
         intended(hasComponent(RequestActivity.class.getName()), times(1));
@@ -79,6 +81,7 @@ public class RequestActivityTest {
     public void acceptButton(){
 
         Intents.init();
+        //Navigate to REquest
 
         onView(withId(R.id.loginUser))
                 .perform(typeText("intest2"), closeSoftKeyboard());
@@ -88,6 +91,7 @@ public class RequestActivityTest {
                 .perform(click());
         onView(withId(R.id.action_request))
                 .perform(click());
+
         onData(anything()).inAdapterView(withId(R.id.listviewRequest)).atPosition(0).
                 onChildView(withId(R.id.buttonAccept)).perform(click());
         intended(hasComponent(RequestActivity.class.getName()), times(1));

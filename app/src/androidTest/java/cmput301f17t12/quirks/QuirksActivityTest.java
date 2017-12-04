@@ -18,6 +18,7 @@ import java.util.Calendar;
 import cmput301f17t12.quirks.Activities.AddQuirkActivity;
 import cmput301f17t12.quirks.Activities.LoginActivity;
 import cmput301f17t12.quirks.Activities.MainActivity;
+import cmput301f17t12.quirks.Activities.QuirksActivity;
 import cmput301f17t12.quirks.Enumerations.Day;
 
 import static android.support.test.espresso.Espresso.onData;
@@ -58,11 +59,13 @@ public class QuirksActivityTest {
     @Test
     public void newQuirkButton(){
         Intents.init();
+        //NavigateTo QuirkListActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest2"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onView(withId(R.id.add_quirk_button)).perform(click());
         intended(hasComponent(AddQuirkActivity.class.getName()), times(1));
+        intended(hasComponent(QuirksActivity.class.getName()), times(1));
         Intents.release();
 
     }
@@ -71,12 +74,17 @@ public class QuirksActivityTest {
     @Test
     public void QuirkActivityFilterToday(){
         Intents.init();
+        //NavigateTo QuirkListActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest2"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
+
+        //Filter by Date
         onView(withId(R.id.filter_type)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("Today\'s Habits"))).perform(click());
         onView(withId(R.id.applyFilterButton)).perform(click());
+
+        //Click on Test Quirk and ensure proper date is also clicked for Occurence !
         onData(anything()).inAdapterView(withId(R.id.quirk_listview)).atPosition(0).perform(click());
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_WEEK);
@@ -105,6 +113,8 @@ public class QuirksActivityTest {
                 onView(withId(R.id.QuirkEditradioButtonSat)).check(matches(isChecked()));
                 break;
         }
+
+        intended(hasComponent(QuirksActivity.class.getName()), times(1));
         Intents.release();
     }
 

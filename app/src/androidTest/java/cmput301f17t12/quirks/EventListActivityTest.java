@@ -48,13 +48,15 @@ public class EventListActivityTest {
     public void viewButton() {
         // Type username and go to quirk list then event list of first quirk
         Intents.init();
+
+        //Navigate to EventListActivity
         onView(withId(R.id.loginUser))
                 .perform(typeText(username), closeSoftKeyboard());
         onView(withId(R.id.loginBtn))
                 .perform(click());
         onView(withId(R.id.action_quirklist))
                 .perform(click());
-
+        //Test to ensure that the ViewButton is functional and leads to EditEventActivity
         onData(anything()).inAdapterView(withId(R.id.quirk_listview)).atPosition(0).
                 onChildView(withId(R.id.quirk_button)).perform(click());
         onData(anything()).inAdapterView(withId(R.id.el_eventslistview)).atPosition(0).

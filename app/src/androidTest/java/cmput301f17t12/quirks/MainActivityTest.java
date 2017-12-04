@@ -46,6 +46,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 
@@ -70,6 +71,7 @@ public class MainActivityTest {
     @Test
     public void FilteringEventbyComment(){
         Intents.init();
+        //Navigate to MainActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest2"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_home)).perform(click());
@@ -77,13 +79,14 @@ public class MainActivityTest {
         onView(withId(R.id.spinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("By Comment"))).perform(click());
         onView(withId(R.id.applyFilterButton)).perform(click());
-
+        onView(withId(R.id.captionTxt)).check(matches(withText(containsString("Type1"))));
         Intents.release();
     }
     //Filter by Event Type and show the correct events
     @Test
     public void FilteringEventbyType(){
         Intents.init();
+        //Navigate to MainActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest2"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_home)).perform(click());
@@ -97,9 +100,11 @@ public class MainActivityTest {
     @Test
     public void viewMapButton(){
         Intents.init();
+        //Navigate to MainActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest2"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_home)).perform(click());
+        //Ensure Mapbutton navigates user to MapActivity
         onView(withId(R.id.mapButton)).perform(click());
         intended(hasComponent(MapActivity.class.getName()));
         Intents.release();

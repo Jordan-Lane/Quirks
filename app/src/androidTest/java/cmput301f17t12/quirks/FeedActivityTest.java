@@ -64,20 +64,19 @@ public class FeedActivityTest {
 
         Intents.init();
 
-        //Login with user testing 123 and go to NewEvent ACtivity to have
-        //quirks to log
+        //Navigate to FeedActivity
         onView(withId(R.id.loginUser))
-                .perform(typeText("enzo"), closeSoftKeyboard());
+                .perform(typeText("intest2"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn))
                 .perform(click());
-
-
-
         //go to edit event
         onView(withId(R.id.action_social))
                 .perform(click());
         onView(withId(R.id.action_feed))
                 .perform(click());
+
+        //Test to select friend's event
+        //Close the dialog that appears successfully
         onData(anything()).inAdapterView(withId(R.id.listViewFeed)).atPosition(0).
                 onChildView(withId(R.id.eventbtn)).perform(click());
         onView(withId(R.id.txtclose))

@@ -138,7 +138,7 @@ public class BaseActivityTest {
     }
 
     @Test
-
+    //Test to action_geomap button will take user to MapActivity
     public void actionMapTest() {
 
         Intents.init();
@@ -155,7 +155,7 @@ public class BaseActivityTest {
     }
 
     @Test
-
+    //Test action_social button will take user to FriendActivity
     public void actionSocialTest() {
 
         Intents.init();

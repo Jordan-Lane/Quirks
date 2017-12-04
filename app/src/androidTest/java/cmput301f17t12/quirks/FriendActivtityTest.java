@@ -57,7 +57,7 @@ public class FriendActivtityTest {
 
     }
 
-    //Friends
+    //Friends delete button
     @Test
     public void deleteButton(){
 
@@ -70,13 +70,14 @@ public class FriendActivtityTest {
         onView(withId(R.id.loginBtn))
                 .perform(click());
 
-//        //Accept friend request for deletion
-//        onView(withId(R.id.action_social))
-//                .perform(click());
-//        onView(withId(R.id.action_request))
-//                .perform(click());
-//        onData(anything()).inAdapterView(withId(R.id.listviewRequest)).atPosition(0).
-//                onChildView(withId(R.id.buttonAccept)).perform(click());
+        //Similar to @Before, to enusre friend exists in Friends List
+        //Accept friend request for deletion
+        onView(withId(R.id.action_social))
+                .perform(click());
+        onView(withId(R.id.action_request))
+                .perform(click());
+        onData(anything()).inAdapterView(withId(R.id.listviewRequest)).atPosition(0).
+                onChildView(withId(R.id.buttonAccept)).perform(click());
 
         //go to friend activity
         onView(withId(R.id.action_social))
@@ -86,7 +87,7 @@ public class FriendActivtityTest {
         onData(anything()).inAdapterView(withId(R.id.friendlistView)).atPosition(0).
                 onChildView(withId(R.id.delete_friend_but)).perform(click());
 
-        intended(hasComponent(FriendActivity.class.getName()), times(2));
+        intended(hasComponent(FriendActivity.class.getName()), times(3));
 
         Intents.release();
 

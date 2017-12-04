@@ -77,10 +77,13 @@ public class AddQuirkActivityTest {
     @Test
     public void addQuirkTitleTest(){
         Intents.init();
+        //go to AddQuirkActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onView(withId(R.id.add_quirk_button)).perform(click());
+
+        //Title used to test
         String title = "Title";
         onView(withId(R.id.QuirkeditTextTitle)).perform(typeText("Title"), closeSoftKeyboard());
         onView(withId(R.id.QuirkeditTextTitle)).check(matches(withText(title)));
@@ -91,10 +94,13 @@ public class AddQuirkActivityTest {
     @Test
     public void addQuirkTypeTest(){
         Intents.init();
+        //go to AddQuirkActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onView(withId(R.id.add_quirk_button)).perform(click());
+
+        //Type used to Test
         String type = "Type";
         onView(withId(R.id.QuirkeditTextType)).perform(typeText("Type"),closeSoftKeyboard());
         onView(withId(R.id.QuirkeditTextType)).check(matches(withText(type)));
@@ -105,10 +111,13 @@ public class AddQuirkActivityTest {
     @Test
     public void addQuirkReasonTest(){
         Intents.init();
+        //go to AddQuirkActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onView(withId(R.id.add_quirk_button)).perform(click());
+
+        //Reason to test
         String reason = "Reason";
         onView(withId(R.id.QuirkeditTextReason)).perform(typeText("Reason"),closeSoftKeyboard());
         onView(withId(R.id.QuirkeditTextReason)).check(matches(withText(reason)));
@@ -117,13 +126,16 @@ public class AddQuirkActivityTest {
 
     }
 
+    //Test able to input Goal
     @Test
     public void addQuirkGoalTest(){
         Intents.init();
+        //go to AddQuirkActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onView(withId(R.id.add_quirk_button)).perform(click());
+        //Test Goal to test input
         String goal= "15";
         onView(withId(R.id.QuirkeditTextGoal)).perform(typeText(String.valueOf("15")));
         onView(withId(R.id.QuirkeditTextGoal)).check(matches(withText(goal)));
@@ -136,10 +148,12 @@ public class AddQuirkActivityTest {
     @Test
     public void addQuirkOccTest(){
         Intents.init();
+        //go to AddQuirkActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onView(withId(R.id.add_quirk_button)).perform(click());
+        //Click Monday Radio Buton
         onView(withId(R.id.QuirkEditradioButtonMon)).perform(click());
         onView(withId(R.id.QuirkEditradioButtonMon)).check(matches(isChecked()));
         intended(hasComponent(AddQuirkActivity.class.getName()), times(1));
@@ -150,10 +164,12 @@ public class AddQuirkActivityTest {
     @Test
     public void addQuirkDateTest(){
        Intents.init();
+        //go to AddQuirkActivity
        onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
        onView(withId(R.id.loginBtn)).perform(click());
        onView(withId(R.id.action_quirklist)).perform(click());
        onView(withId(R.id.add_quirk_button)).perform(click());
+        //IntentTest with the Date for Quirk StartDate
        int year  = 2017;
        int monthOfYear  = 11;
        int dayOfMonth =  25;
@@ -171,11 +187,12 @@ public class AddQuirkActivityTest {
     @Test
     public void addQuirkSaveButton(){
         Intents.init();
-
+        //go to AddQuirkActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onView(withId(R.id.add_quirk_button)).perform(click());
+        //Fill all fields then save
         onView(withId(R.id.QuirkEditradioButtonMon)).perform(click());
         onView(withId(R.id.QuirkeditTextReason)).perform(typeText("Reason"),closeSoftKeyboard());
 
@@ -192,8 +209,10 @@ public class AddQuirkActivityTest {
         onView(withId(android.R.id.button1)).perform(click());
 
         onView(withId(R.id.SaveBut)).perform(click());
+        //Check that hte correct activities were visited
         intended(hasComponent(QuirksActivity.class.getName()));
         intended(hasComponent(AddQuirkActivity.class.getName()), times(1));
+        //Go to View Quirk to ensure that data is properly saved then delete it
         onData(anything()).inAdapterView(withId(R.id.quirk_listview)).atPosition(1).
                 perform(click());
         intended(hasComponent(EditQuirkActivity.class.getName()));
@@ -212,12 +231,15 @@ public class AddQuirkActivityTest {
     @Test
     public void addQuirkCancelButton(){
         Intents.init();
+        //go to AddQuirkActivity
         onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onView(withId(R.id.add_quirk_button)).perform(click());
+        //Test Cancel, Ensure that it returns to QuirActivity (Second time after cancel)
         onView(withId(R.id.CancelBut)).perform(click());
         intended(hasComponent(AddQuirkActivity.class.getName()), times(1));
+        intended(hasComponent(QuirksActivity.class.getName()), times(1));
         Intents.release();
     }
 
