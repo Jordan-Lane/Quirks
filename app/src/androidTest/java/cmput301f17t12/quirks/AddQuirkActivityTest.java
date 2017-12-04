@@ -75,7 +75,7 @@ public class AddQuirkActivityTest {
     @Test
     public void addQuirkTitleTest(){
         Intents.init();
-        onView(withId(R.id.loginUser)).perform(typeText("intest"), closeSoftKeyboard());
+        onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onView(withId(R.id.add_quirk_button)).perform(click());
@@ -88,7 +88,7 @@ public class AddQuirkActivityTest {
     @Test
     public void addQuirkTypeTest(){
         Intents.init();
-        onView(withId(R.id.loginUser)).perform(typeText("intest"), closeSoftKeyboard());
+        onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onView(withId(R.id.add_quirk_button)).perform(click());
@@ -101,7 +101,7 @@ public class AddQuirkActivityTest {
     @Test
     public void addQuirkReasonTest(){
         Intents.init();
-        onView(withId(R.id.loginUser)).perform(typeText("intest"), closeSoftKeyboard());
+        onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onView(withId(R.id.add_quirk_button)).perform(click());
@@ -115,7 +115,7 @@ public class AddQuirkActivityTest {
     @Test
     public void addQuirkGoalTest(){
         Intents.init();
-        onView(withId(R.id.loginUser)).perform(typeText("intest"), closeSoftKeyboard());
+        onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onView(withId(R.id.add_quirk_button)).perform(click());
@@ -128,7 +128,7 @@ public class AddQuirkActivityTest {
     @Test
     public void addQuirkOccTest(){
         Intents.init();
-        onView(withId(R.id.loginUser)).perform(typeText("intest"), closeSoftKeyboard());
+        onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onView(withId(R.id.add_quirk_button)).perform(click());
@@ -141,7 +141,7 @@ public class AddQuirkActivityTest {
     @Test
     public void addQuirkDateTest(){
        Intents.init();
-       onView(withId(R.id.loginUser)).perform(typeText("intest"), closeSoftKeyboard());
+       onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
        onView(withId(R.id.loginBtn)).perform(click());
        onView(withId(R.id.action_quirklist)).perform(click());
        onView(withId(R.id.add_quirk_button)).perform(click());
@@ -160,7 +160,7 @@ public class AddQuirkActivityTest {
     @Test
     public void addQuirkSaveButton(){
         Intents.init();
-        onView(withId(R.id.loginUser)).perform(typeText("intest"), closeSoftKeyboard());
+        onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onView(withId(R.id.add_quirk_button)).perform(click());
@@ -196,7 +196,7 @@ public class AddQuirkActivityTest {
     @Test
     public void addQuirkCancelButton(){
         Intents.init();
-        onView(withId(R.id.loginUser)).perform(typeText("intest"), closeSoftKeyboard());
+        onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         onView(withId(R.id.action_quirklist)).perform(click());
         onView(withId(R.id.add_quirk_button)).perform(click());

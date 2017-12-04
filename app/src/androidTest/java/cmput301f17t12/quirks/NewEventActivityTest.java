@@ -107,10 +107,6 @@ public class NewEventActivityTest {
                 .perform(click());
         onView(withId(R.id.action_quirklist))
                 .perform(click());
-
-        onData(anything()).inAdapterView(withId(R.id.quirk_listview)).atPosition(0).
-                onChildView(withId(R.id.quirk_button)).perform(click());
-
         //click on view/edit/delete button for latest event
         final int[] numberOfAdapterItems = new int[1];
         onView(withId(R.id.el_eventslistview)).check(matches(new TypeSafeMatcher<View>() {
@@ -133,32 +129,6 @@ public class NewEventActivityTest {
         onView(withId(R.id.comment_edittext)).check(matches(withText(comment)));
         Intents.release();
     }
-
-
-    //TODO: Intent to test image
-//    @Test
-//    public void addImageButton(){
-//        //Need to initialize intents or you will get null exception
-//        Intents.init();
-//
-//        //Login with user testing 123 and go to NewEvent ACtivity to have
-//        //quirks to log
-//        onView(withId(R.id.loginUser))
-//                .perform(typeText("intenttesting"), closeSoftKeyboard());
-//        onView(withId(R.id.loginBtn))
-//                .perform(click());
-//        onView(withId(R.id.action_newevent))
-//                .perform(click());
-//
-//        //Click Browse Button
-//        onView(withId(R.id.browse_button))
-//                .perform(click());
-//        // Check that the intent is changed to main activity
-//        onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click());
-//        Intents.release();
-//
-//    }
-
 
 
 
