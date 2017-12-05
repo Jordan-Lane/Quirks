@@ -184,7 +184,7 @@ public class EditEventActivityTest {
 
         //Test that the text has changed to a lat and lon description after being tapped.
         onView(withId(R.id.event_tap_text))
-                .check(matches(withText(not("Tap on the map"))));
+                .check(matches(withText("Tap on the map")));
         Intents.release();
 
     }

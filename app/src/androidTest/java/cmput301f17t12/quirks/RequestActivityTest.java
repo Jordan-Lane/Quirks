@@ -27,9 +27,12 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.Intents.times;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.anything;
 
@@ -73,6 +76,7 @@ public class RequestActivityTest {
         //Navigate to REquest
         onData(anything()).inAdapterView(withId(R.id.listviewRequest)).atPosition(0).
                 onChildView(withId(R.id.buttonDecline)).perform(click());
+        onView(withText("Request declined")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         intended(hasComponent(RequestActivity.class.getName()), times(1));
         Intents.release();
 
@@ -94,7 +98,15 @@ public class RequestActivityTest {
 
         onData(anything()).inAdapterView(withId(R.id.listviewRequest)).atPosition(0).
                 onChildView(withId(R.id.buttonAccept)).perform(click());
+        onView(withText("Friend accepted")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        SystemClock.sleep(5500);
+        onView(withText("Request accepted!")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         intended(hasComponent(RequestActivity.class.getName()), times(1));
+        //Delete the added Friend for future tests to run
+        onView(withId(R.id.action_friends))
+                .perform(click());
+        onData(anything()).inAdapterView(withId(R.id.friendlistView)).atPosition(1).
+                onChildView(withId(R.id.delete_friend_but)).perform(click());
         Intents.release();
 
     }

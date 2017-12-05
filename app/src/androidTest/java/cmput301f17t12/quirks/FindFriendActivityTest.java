@@ -54,50 +54,169 @@ import static org.hamcrest.Matchers.anything;
 public class FindFriendActivityTest {
 
 
-        @Rule
-        public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule<>(
-                LoginActivity.class);
-        private LoginActivity loginActivity;
+    @Rule
+    public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule<>(
+            LoginActivity.class);
+    private LoginActivity loginActivity;
 
-        @Before
-        public void initialize() {
+    @Before
+    public void initialize() {
 
-            loginActivity = mActivityRule.getActivity();
+        loginActivity = mActivityRule.getActivity();
 
 
-        }
+    }
+    //Test Search for Friends is functional
+    @Test
+    public void emptySearch(){
 
-        //Test Search for Friends is functional
-        @Test
-        public void searchFriend(){
+        Intents.init();
 
-            Intents.init();
+        //Navigate to FindFriendsActivity
+        onView(withId(R.id.loginUser))
+                .perform(typeText("intest3"), closeSoftKeyboard());
+        onView(withId(R.id.loginBtn))
+                .perform(click());
+        onView(withId(R.id.action_social))
+                .perform(click());
+        onView(withId(R.id.action_findFriends))
+                .perform(click());
 
-            //Navigate to FindFriendsActivity
-            onView(withId(R.id.loginUser))
-                    .perform(typeText("intest3"), closeSoftKeyboard());
-            onView(withId(R.id.loginBtn))
-                    .perform(click());
-            onView(withId(R.id.action_social))
-                    .perform(click());
-            onView(withId(R.id.action_findFriends))
-                    .perform(click());
+        //Put empty to Search
+        onView(withId(R.id.editTextFindFriend))
+                .perform(typeText(""), closeSoftKeyboard());
+        onView(withId(R.id.imageButtonSearch))
+                .perform(click());
 
-            //Put username to Search
-            onView(withId(R.id.editTextFindFriend))
-                    .perform(typeText("intest2"), closeSoftKeyboard());
-            onView(withId(R.id.imageButtonSearch))
-                    .perform(click());
 
-            //Test to show that the user's name becomes the first one
-            onData(anything()).inAdapterView(withId(R.id.findfriend_listview)).atPosition(0).
-                    onChildView(withId(R.id.FindFriendtext)).check(matches(withText("intest2")));
-            //Test that searching for user toast appears
-            onView(withText("Searching for user")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-            intended(hasComponent(FindFriendActivity.class.getName()),times(1));
-            Intents.release();
+        //Test that searching for user toast appears
+        SystemClock.sleep(1000);
+        onView(withText("Please input a username")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
 
-        }
+        intended(hasComponent(FindFriendActivity.class.getName()),times(1));
+        Intents.release();
+
+    }
+//    /Test Search for Friends is functional
+    @Test
+    public void CanotAddSelfToast(){
+
+        Intents.init();
+
+        //Navigate to FindFriendsActivity
+        onView(withId(R.id.loginUser))
+                .perform(typeText("intest3"), closeSoftKeyboard());
+        onView(withId(R.id.loginBtn))
+                .perform(click());
+        onView(withId(R.id.action_social))
+                .perform(click());
+        onView(withId(R.id.action_findFriends))
+                .perform(click());
+
+        //Put username to Search
+        onView(withId(R.id.editTextFindFriend))
+                .perform(typeText("intest3"), closeSoftKeyboard());
+        onView(withId(R.id.imageButtonSearch))
+                .perform(click());
+
+        //Test that searching for user toast appears
+        SystemClock.sleep(1000);
+        onView(withText("Cannot input yourself")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        intended(hasComponent(FindFriendActivity.class.getName()),times(1));
+        Intents.release();
+
+    }
+
+    //Test Search for Friends is functional
+    @Test
+    public void usernotfoundToast(){
+
+        Intents.init();
+
+        //Navigate to FindFriendsActivity
+        onView(withId(R.id.loginUser))
+                .perform(typeText("intest3"), closeSoftKeyboard());
+        onView(withId(R.id.loginBtn))
+                .perform(click());
+        onView(withId(R.id.action_social))
+                .perform(click());
+        onView(withId(R.id.action_findFriends))
+                .perform(click());
+
+        //Put username to Search
+        onView(withId(R.id.editTextFindFriend))
+                .perform(typeText("casciwpsialcwsal"), closeSoftKeyboard());
+        onView(withId(R.id.imageButtonSearch))
+                .perform(click());
+
+        //Test that searching for user toast appears
+        onView(withText("Searching for user")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        SystemClock.sleep(2500);
+        onView(withText("User does not exist")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        intended(hasComponent(FindFriendActivity.class.getName()),times(1));
+        Intents.release();
+
+    }
+    //Test Search for Friends is functional
+    @Test
+    public void userIsInFriends(){
+
+        Intents.init();
+
+        //Navigate to FindFriendsActivity
+        onView(withId(R.id.loginUser))
+                .perform(typeText("intest3"), closeSoftKeyboard());
+        onView(withId(R.id.loginBtn))
+                .perform(click());
+        onView(withId(R.id.action_social))
+                .perform(click());
+        onView(withId(R.id.action_findFriends))
+                .perform(click());
+
+        //Put username to Search
+        onView(withId(R.id.editTextFindFriend))
+                .perform(typeText("intest2"), closeSoftKeyboard());
+        onView(withId(R.id.imageButtonSearch))
+                .perform(click());
+        //Test that searching for user toast appears
+
+        onView(withText("You're already friends with them")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        intended(hasComponent(FindFriendActivity.class.getName()),times(1));
+        Intents.release();
+
+    }
+
+    //Test Search for Friends is functional
+    @Test
+    public void searchFriend(){
+
+        Intents.init();
+
+        //Navigate to FindFriendsActivity
+        onView(withId(R.id.loginUser))
+                .perform(typeText("intest3"), closeSoftKeyboard());
+        onView(withId(R.id.loginBtn))
+                .perform(click());
+        onView(withId(R.id.action_social))
+                .perform(click());
+        onView(withId(R.id.action_findFriends))
+                .perform(click());
+
+        //Put username to Search
+        onView(withId(R.id.editTextFindFriend))
+                .perform(typeText("intest4"), closeSoftKeyboard());
+        onView(withId(R.id.imageButtonSearch))
+                .perform(click());
+
+        //Test to show that the user's name becomes the first one
+        onData(anything()).inAdapterView(withId(R.id.findfriend_listview)).atPosition(0).
+                onChildView(withId(R.id.FindFriendtext)).check(matches(withText("intest4")));
+        //Test that searching for user toast appears
+        onView(withText("Searching for user")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        intended(hasComponent(FindFriendActivity.class.getName()),times(1));
+        Intents.release();
+
+    }
 
     //Add Friends
     @Test
@@ -117,19 +236,20 @@ public class FindFriendActivityTest {
 
         //Searh for friend adn select AddButton
         onView(withId(R.id.editTextFindFriend))
-                .perform(typeText("intest2"), closeSoftKeyboard());
+                .perform(typeText("intest4"), closeSoftKeyboard());
         onView(withId(R.id.imageButtonSearch))
                 .perform(click());
         onData(anything()).inAdapterView(withId(R.id.findfriend_listview)).atPosition(0).
-                onChildView(withId(R.id.FindFriendtext)).check(matches(withText("intest2")));
+                onChildView(withId(R.id.FindFriendtext)).check(matches(withText("intest4" +
+                "")));
         onData(anything()).inAdapterView(withId(R.id.findfriend_listview)).atPosition(0).
                 onChildView(withId(R.id.imageButtonAddFriend)).perform(click());
         onView(withText("Searching for user")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         //Sleep to wait for dialog, might have delay frm previews toast
-        SystemClock.sleep(2000);
+        SystemClock.sleep(2100);
         //Test that toast messgae from sending FriendRequest button appears
         onView(withText("Sending Friend Request")).inRoot(withDecorView(not(Matchers.is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-        SystemClock.sleep(3000);
+        SystemClock.sleep(2700);
         onView(withText("Sent Friend Request")).inRoot(withDecorView(not(Matchers.is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         intended(hasComponent(FindFriendActivity.class.getName()),times(1));
         Intents.release();

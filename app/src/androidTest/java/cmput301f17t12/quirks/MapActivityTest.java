@@ -60,7 +60,7 @@ public class MapActivityTest {
         // Specify a valid comment
 
         loginActivity = mActivityRule.getActivity();
-        tapOriginalText = "CameraPosition{target=lat/lng: (0.0,53.523199930787094), zoom=2.0, tilt=0.0, bearing=0.0}";
+        tapOriginalText = "Tap on the Map";
 
     }
 
