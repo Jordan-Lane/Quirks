@@ -113,22 +113,31 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println("Logging in as: " + user.getUsername());
         System.out.println("JestId: " + user.getId());
         editor.putString("jestID", user.getId());
-        System.out.println("reseting offline stuff");
         editor.putInt("offlineChanges", 0);
         editor.commit();
 
-        System.out.println("cleaning files");
-        // this might be a problem
-        System.out.println("1");
         HelperFunctions.saveCurrentUser(getApplicationContext(), user);
-        System.out.println("2");
         HelperFunctions.clearFile(getApplicationContext(), "allUsers.txt");
 
-        System.out.println("fetching all users");
-        ArrayList<User> users = HelperFunctions.getUsersObject();
-        HelperFunctions.saveInFile(users, getApplicationContext(), "allUsers.txt");
-        System.out.println("got all users");
 
+        String query = "{" +
+                "  \"from\" :0, \"size\" : 5000," +
+                "  \"query\": {" +
+                "    \"match_all\": {}" +
+                "    }" +
+                "}";
+
+        ArrayList<User> users = HelperFunctions.getAllUsers(query);
+        if (users != null){
+            System.out.println(users.size());
+            for (int i = 0; i < users.size(); i ++){
+                System.out.println(users.get(i));
+            }
+        }
+        else{
+            System.out.println("users was null at login");
+        }
+        HelperFunctions.saveInFile(users, getApplicationContext(), "allUsers.txt");
 
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra("user", user);

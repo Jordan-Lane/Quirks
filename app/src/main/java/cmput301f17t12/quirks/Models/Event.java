@@ -223,6 +223,7 @@ public class Event implements Mappable, Newsable, Serializable {
         return relativeTimeSpan.toString();
     }
 
+
     /**
      * Build the description for the event
      * @return Description string

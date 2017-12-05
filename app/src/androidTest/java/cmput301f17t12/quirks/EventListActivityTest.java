@@ -39,10 +39,11 @@ public class EventListActivityTest {
     public void initialize() {
         // Specify a valid comment
         comment = "testing comment";
-        username = "testing123";
+        username = "intest3";
         loginActivity = mActivityRule.getActivity();
     }
 
+    //Test the button to view/Edit Event to change activity
     @Test
     public void viewButton() {
         // Type username and go to quirk list then event list of first quirk
@@ -56,12 +57,11 @@ public class EventListActivityTest {
 
         onData(anything()).inAdapterView(withId(R.id.quirk_listview)).atPosition(0).
                 onChildView(withId(R.id.quirk_button)).perform(click());
-
-        //click on view/edit/delete button
         onData(anything()).inAdapterView(withId(R.id.el_eventslistview)).atPosition(0).
                 onChildView(withId(R.id.el_eventview)).perform(click());
 
         intended(hasComponent(EditEventActivity.class.getName()));
+
 
         Intents.release();
     }

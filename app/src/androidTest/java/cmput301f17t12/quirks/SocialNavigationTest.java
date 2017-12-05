@@ -26,13 +26,17 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 
 import cmput301f17t12.quirks.Activities.BaseActivity;
+import cmput301f17t12.quirks.Activities.FeedActivity;
+import cmput301f17t12.quirks.Activities.FindFriendActivity;
 import cmput301f17t12.quirks.Activities.FriendActivity;
 import cmput301f17t12.quirks.Activities.LoginActivity;
 import cmput301f17t12.quirks.Activities.MainActivity;
 import cmput301f17t12.quirks.Activities.MapActivity;
 import cmput301f17t12.quirks.Activities.NewEventActivity;
 import cmput301f17t12.quirks.Activities.QuirksActivity;
+import cmput301f17t12.quirks.Activities.RequestActivity;
 import cmput301f17t12.quirks.Activities.SocialActivity;
+import cmput301f17t12.quirks.Activities.TradeActivity;
 import cmput301f17t12.quirks.Helpers.BottomNavigationViewHelper;
 import cmput301f17t12.quirks.Models.Inventory;
 import cmput301f17t12.quirks.Models.Quirk;
@@ -63,7 +67,7 @@ import static org.hamcrest.Matchers.allOf;
 
 
 @RunWith(AndroidJUnit4.class)
-public class BaseActivityTest {
+public class SocialNavigationTest {
 
     @Rule
     //Login activity as starting view
@@ -78,21 +82,23 @@ public class BaseActivityTest {
 
     }
 
-    //Test to home button will take to MainActivity
+    //Test to friend button will take to FriendActivity
     @Test
-    public void actionHomeClick() {
+    public void actionFriendClick() {
 
         Intents.init();
-        onView(withId(R.id.loginUser)).perform(typeText("intest"), closeSoftKeyboard());
+        onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
         //Click action Home
 
-        onView(withId(R.id.action_home))
+        onView(withId(R.id.action_social))
+                .perform(click());
+        onView(withId(R.id.action_friends))
                 .perform(click());
 
         // Check that we are in main activity (Twice because once when login and another when
         // home button is clicked
-        intended(hasComponent(MainActivity.class.getName()),times(2));
+        intended(hasComponent(FriendActivity.class.getName()),times(2));
         Intents.release();
     }
 
@@ -101,72 +107,91 @@ public class BaseActivityTest {
 
 
 
-    //Test to action_newevent button will take to NewEventActivity
+    //Test to FindFriend button will take to FindFriendActivity
     @Test
-    public void actionNewEventClick() {
+    public void actionFindFriendClick() {
 
         Intents.init();
-        onView(withId(R.id.loginUser)).perform(typeText("intest"), closeSoftKeyboard());
+        onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
         onView(withId(R.id.loginBtn)).perform(click());
-        //Click action_newevent
-        onView(withId(R.id.action_newevent))
-                .perform(click());
-        // Check that we are in main activity
-        intended(hasComponent(NewEventActivity
-                .class.getName()));
+        //Click action Home
 
-        Intents.release();
-
-    }
-//
-    //Test to action_quirklist button will take to NewEventActivity
-    @Test
-
-    public void actionQuirksTest() {
-
-        Intents.init();
-        onView(withId(R.id.loginUser)).perform(typeText("intest"), closeSoftKeyboard());
-        onView(withId(R.id.loginBtn)).perform(click());
-        //Click action_newevent
-        onView(withId(R.id.action_quirklist))
-                .perform(click());
-        // Check that we are in main activity
-        intended(hasComponent(QuirksActivity.class.getName()));
-
-        Intents.release();
-
-    }
-
-    @Test
-
-    public void actionMapTest() {
-
-        Intents.init();
-        onView(withId(R.id.loginUser)).perform(typeText("intest"), closeSoftKeyboard());
-        onView(withId(R.id.loginBtn)).perform(click());
-        //Click action_newevent
-        onView(withId(R.id.action_geomap))
-                .perform(click());
-        // Check that we are in main activity
-        intended(hasComponent(MapActivity.class.getName()));
-
-        Intents.release();
-
-    }
-
-    @Test
-
-    public void actionSocialTest() {
-
-        Intents.init();
-        onView(withId(R.id.loginUser)).perform(typeText("intest"), closeSoftKeyboard());
-        onView(withId(R.id.loginBtn)).perform(click());
-        //Click action_newevent
         onView(withId(R.id.action_social))
                 .perform(click());
-        // Check that we are in main activity
-        intended(hasComponent(FriendActivity.class.getName()));
+        onView(withId(R.id.action_findFriends))
+                .perform(click());
 
+        // Check that we are in main activity (Twice because once when login and another when
+        // home button is clicked
+        intended(hasComponent(FriendActivity.class.getName()),times(1));
+        intended(hasComponent(FindFriendActivity.class.getName()),times(1));
+        Intents.release();
+
+    }
+    //
+    //Test to Requests button will take to RequestActivity
+    @Test
+
+    public void actionRequestTest() {
+
+        Intents.init();
+        onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
+        onView(withId(R.id.loginBtn)).perform(click());
+        //Click action Home
+
+        onView(withId(R.id.action_social))
+                .perform(click());
+        onView(withId(R.id.action_request))
+                .perform(click());
+
+        // Check that we are in main activity (Twice because once when login and another when
+        // home button is clicked
+        intended(hasComponent(FriendActivity.class.getName()),times(1));
+        intended(hasComponent(RequestActivity.class.getName()),times(1));
+        Intents.release();
+
+    }
+
+    //Test to Feed button will take to FeedActivity
+    @Test
+
+    public void actionFeedTest() {
+
+        Intents.init();
+        onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
+        onView(withId(R.id.loginBtn)).perform(click());
+        //Click action Home
+
+        onView(withId(R.id.action_social))
+                .perform(click());
+        onView(withId(R.id.action_feed))
+                .perform(click());
+
+        // Check that we are in main activity (Twice because once when login and another when
+        // home button is clicked
+        intended(hasComponent(FriendActivity.class.getName()),times(1));
+        intended(hasComponent(FeedActivity.class.getName()),times(1));
+        Intents.release();
+    }
+    //Test to Collectibles button will take to TradeACtivity
+    @Test
+
+    public void actionCollectiblesTest() {
+
+        Intents.init();
+        onView(withId(R.id.loginUser)).perform(typeText("intest3"), closeSoftKeyboard());
+        onView(withId(R.id.loginBtn)).perform(click());
+        //Click action Home
+
+        onView(withId(R.id.action_social))
+                .perform(click());
+        onView(withId(R.id.action_trade))
+                .perform(click());
+
+        // Check that we are in main activity (Twice because once when login and another when
+        // home button is clicked
+        intended(hasComponent(FriendActivity.class.getName()),times(1));
+        intended(hasComponent(TradeActivity.class.getName()),times(1));
         Intents.release();
 
     }
