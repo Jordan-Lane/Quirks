@@ -141,6 +141,7 @@ public class HelperFunctions {
         ArrayList<User> users;
 
         String query = "{" +
+                "  \"from\" :0, \"size\" : 5000," +
                 "  \"query\": {" +
                 "    \"match_all\": {}" +
                 "    }" +
@@ -286,6 +287,32 @@ public class HelperFunctions {
             }
 
         }
+//        syn
+        saveCurrentUser(context, user);
+    }
+
+    /**
+     * Updates the current user online and offline.
+     * @param context
+     * @param user
+     */
+    public static void updateSingleUserTriggered(Context context, User user){
+        // update in db
+
+
+        ElasticSearchUserController.UpdateUserTask updateUserTask = new ElasticSearchUserController.UpdateUserTask();
+        updateUserTask.execute(user);
+        try{
+            int status = updateUserTask.get();
+            if (status < 0){
+                triggerOfflineChangesQueued(context);
+            }
+        }
+        catch (Exception e){
+            Log.i("Error", "Failed update user from the async object\n" + e.toString() +"\n.");
+        }
+
+//        syn
         saveCurrentUser(context, user);
     }
 
@@ -341,11 +368,26 @@ public class HelperFunctions {
         ArrayList<User> cur = loadFromFile(context, "currentUserFile.txt");
         if (cur.size()>0){
             currentlylogged = cur.get(0);
-            ArrayList<User> users = loadFromFile(context, "allUsers.txt");
-            users = syncCurrentToList(context, currentlylogged, users);
-            if (users != null){
-                updateUsers(context, users);
-            }
+//            ArrayList<User> users = loadFromFile(context, "allUsers.txt");
+
+            updateSingleUserTriggered(context, currentlylogged);
+//            if (users == null){
+//                System.out.println("No other users");
+//            }
+//
+//            if (users != null){
+////                for (int i = 0; i < users.size(); i++){
+////                    System.out.println(users.get(i).getUsername());
+////                }
+//                users = syncCurrentToList(context, currentlylogged, users);
+//                System.out.println("Trying to process offline:");
+//                System.out.println("currentlylogged: ");
+//                System.out.println(currentlylogged.getQuirks().size());
+//                System.out.println("users: ");
+//
+//                updateUsers(context, users);
+////                updateSingleUser(context, currentlylogged);
+//            }
             saveCurrentUser(context, currentlylogged);
         }
         return getOfflineChangesQueued(context);
@@ -386,6 +428,7 @@ public class HelperFunctions {
         clearFile(context, "currentUserFile.txt");
         saveInFile(userList, context, "currentUserFile.txt");
         String query = "{" +
+                "  \"from\" :0, \"size\" : 5000," +
                 "  \"query\": {" +
                 "    \"match_all\": {}" +
                 "    }" +
