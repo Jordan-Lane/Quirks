@@ -71,35 +71,7 @@ public class NewEventActivityTest {
         comment = "testing comment";
         loginActivity = mActivityRule.getActivity();
     }
-    @Test
-    public void map(){
-        loginActivity = mActivityRule.getActivity();
-        SystemClock.sleep(1000);
-        Intents.init();
-        mActivityRule.launchActivity(new Intent());
 
-        //Login with user testing 123 and go to NewEvent ACtivity to have
-        //quirks to log
-        onView(withId(R.id.loginUser))
-                .perform(typeText("intest3"), closeSoftKeyboard());
-        onView(withId(R.id.loginBtn))
-                .perform(click());
-        onView(withId(R.id.action_newevent))
-                .perform(click());
-
-        UiDevice device = UiDevice.getInstance(getInstrumentation());
-        UiObject marker = device.findObject(new UiSelector().descriptionContains("Google Maps"));
-
-        onView(withContentDescription("Google Map")).perform(click());
-
-
-
-        //Test that the text has changed to a lat and lon description after being tapped.
-        onView(withId(R.id.event_tap_text))
-                .check(matches(withText(CoreMatchers.not("Tap on the map"))));
-        Intents.release();
-
-    }
     @Test
     public void cancelButton(){
         //Will need to go createa quirk then save
